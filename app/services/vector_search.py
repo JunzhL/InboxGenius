@@ -39,7 +39,7 @@ def find_emails(query_vec, limit=2):
 
     for result in results:
         results_list.append(result)
-        print("Result", result)
+        # print("Result", result)
 
     # print("Type of result: ", type(results))
     # print("Emails matched", list(results))
