@@ -29,7 +29,9 @@
                     <div class="profile-content text-center">
                         <img src="{{ url_for('static', filename='images/profile.png') }}" class="profile-picture" alt="Profile Picture">
                         <h5 class="profile-name">Ignition Hack</h5>
-                        <p class="profile-email">demo@ignitionhacks.com</p>
+                        <p class="profile-email">{{ current_user.id }}</p>
+                        <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+                        <!-- <p class="profile-email">demo@ignitionhacks.com</p> -->
                         <!-- <button class="btn btn-success">Compose</button> -->
                     </div>
                 </div>
