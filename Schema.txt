@@ -1,0 +1,16 @@
+# emails schema
+
+# {
+#     "id": "string",
+#     "sender_info": {
+#         "name": "string",
+#         "email": "string"
+#     },
+#     "subject": "string",
+#     "preview": "string",
+#     "date": "string",
+#     "content": "string",
+#     "attachments": ["string"],
+#     "flagged": "boolean",
+#     "vector_embedding": [float]
+# }

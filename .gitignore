@@ -167,3 +167,5 @@ venv/
 
 # Mac Files
 *.DS_Store
+
+config.py
