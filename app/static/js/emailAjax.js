@@ -37,12 +37,27 @@ function populateEmailList() {
         var formattedDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
         
         var flagIconClass = email.flagged ? 'fas fa-flag flag_active' : 'far fa-flag flag_inactive';
+        
+        const catalog2color = {
+            "Family": () => "Orange",
+            "Social": () => "Blue",
+            "Friends": () => "Green",
+            "Work": () => "Red",
+            // Add more cases as needed
+        };
 
+        // console.log(email.category);
+        var catalogColor = (email.category in catalog2color) ? catalog2color[email.category]() : "Black";
+
+        console.log(catalogColor);
         var emailItem = `
             <li class="list-group-item d-flex justify-content-between align-items-center email-item" data-id="${email._id}">
                 <div class="email-info">
                     <h6>${email.sender_info.name}</h6>
-                    <p class="mb-1">${email.subject}</p>
+                    <div class="d-flex align-items-center">
+                        <span class="dot" style="background-color: ${catalogColor}; border-radius: 50%; width: 10px; height: 10px;"></span>
+                        <p class="mb-1">${email.subject}</p>
+                    </div>
                     <small>${email.preview}</small>
                 </div>
                 <small>${formattedDate}</small>
