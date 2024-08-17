@@ -20,4 +20,14 @@ $(document).ready(function() {
         
         fetchEmails();
     });
+
+    $('.search-box input').on('keypress', function(e) {
+        if (e.which === 13) {
+            var query_text = $(this).val().trim();
+            if (query_text) {
+                aiSearch(query_text);
+            } else {
+                alert('Please enter search text.');
+            }
+        }
 });

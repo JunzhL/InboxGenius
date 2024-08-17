@@ -4,6 +4,8 @@ import os
 import json
 import random
 from app.services.email_service import update_email
+from app.services.generate_preview import get_preview
+from app.services.embedding_service import get_text_embedding
 
 genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
 
@@ -95,25 +97,53 @@ def generate_topic():
 
 
 def format_email(response_json, id: int):
+
+    name = response_json.get("sender_name")
+    organization = response_json.get("organization_name")
+    email = response_json.get("sender_email")
+
+    subject = response_json.get("subject")
+    content = response_json.get("email_body")
+    created_at = response_json.get("created_at_time")
+    attachments = [
+        response_json.get("attachment").split(" ")
+        if response_json.get("attachment")
+        else None
+    ]
+
+    preview = get_preview(
+        name, 
+        organization, 
+        email, 
+        subject, 
+        content, 
+        created_at, 
+        attachments
+    )
+
+    preview = preview.text
+
+    embedding = get_text_embedding(preview)
+
+    embedding = embedding["embedding"]
+
     email = {
         "_id": id,
         "sender_info": {
-            "name": response_json.get("sender_name"),
-            "organization": response_json.get("organization_name"),
-            "email": response_json.get("sender_email"),
+            "name": name,
+            "organization": organization,
+            "email": email,
         },
-        "subject": response_json.get("subject"),
-        "preview": None,
-        "created_at": response_json.get("created_at_time"),
-        "content": response_json.get("email_body"),
-        "attachments": (
-            response_json.get("attachment").split(" ")
-            if response_json.get("attachment")
-            else None
-        ),
+        "subject": subject,
+        "preview": preview,
+        "created_at": created_at,
+        "content": content,
+        "attachments": attachments,
         "flagged": random.choice([True, False]),
-        "embedding": None,
+        "embedding": embedding,
     }
+
+    # print("Email", email)
 
     return email
 
@@ -127,8 +157,9 @@ def generate_email():
         + generate_topic()
         + """.
             Can be all kinds of email, for example, personal emails, team collaboration, etc. Be creative.
-            Generate all types of emails equally. No grammar error is allowed. 
+            Generate all types of emails equally. No grammar error is allowed.
             Please don't use "example company" or "example name" in the email. Use a real company name and a real person name as needed. Also, don't use [ ] or < > as a placeholder in the email.
+            Please generate a replacement for any placeholder in the email, such as "Dear [name]" or "Hello <name>".
             Please generate email in JSON format, including information about sender_name, sender_email, organization_name (optional), subject, email_body, created_at_time (around the 2024 year), and attachments (optional, could be multiple, in a list of string format (split by space)).
             If the optional information section is empty, leave it null. Generate 1 emails at a time.
             """

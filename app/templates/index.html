@@ -65,7 +65,7 @@
             <div class="col-md-3 email-list">
                 <h4 class="mt-4">{{ category.capitalize() }} Emails</h4>
                 <div class="search-box">
-                    <input type="text" placeholder="AI Search">
+                    <input type="text" placeholder="Please enter a description">
                 </div>
                 <nav class="nav nav-pills mt-4">
                     <a class="nav-link active all-emails-btn" href="#" onclick="activateLink(this)">All</a>
@@ -111,5 +111,6 @@
     <script src="{{ url_for('static', filename='js/emailAjax.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     <script src="{{ url_for('static', filename='js/otherfunc.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/vectorSearch.js') }}"></script>
 </body>
 </html>

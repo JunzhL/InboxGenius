@@ -5,13 +5,14 @@ import certifi
 client = MongoClient(os.getenv('MONGO_URI'), tlsCAFile=certifi.where())
 db = client[os.getenv('DATABASE')]
 
-def find_emails(query_vec, limit=1):
+def find_emails(query_vec, limit=2):
     pipeline = [
         {
             '$vectorSearch': {
                 'index': 'vector_index',
                 'path': 'embedding',
                 'queryVector': query_vec,
+                'numCandidates': 10 * limit,
                 'limit': limit
             }
         }, {
@@ -32,9 +33,17 @@ def find_emails(query_vec, limit=1):
         }
     ]
 
-    results = db.aggregate(pipeline)
+    results = db['emails'].aggregate(pipeline)
 
-    print(f"Found {results.count()} emails")
-    print(list(results))
+    results_list = []
 
-    return list(results)
+    for result in results:
+        results_list.append(result)
+        print("Result", result)
+
+    # print("Type of result: ", type(results))
+    # print("Emails matched", list(results))
+    # print("Length of emails matched", len(list(results)))
+    # print("Type of result in list: ", type(list(results)))
+
+    return results_list
