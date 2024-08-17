@@ -128,7 +128,7 @@ def format_email(response_json, id: int):
     embedding = embedding["embedding"]
 
     email = {
-        "_id": id,
+        "_id": str(id),
         "sender_info": {
             "name": name,
             "organization": organization,

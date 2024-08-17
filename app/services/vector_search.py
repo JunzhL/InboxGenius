@@ -9,7 +9,7 @@ def find_emails(query_vec, limit=2):
     pipeline = [
         {
             '$vectorSearch': {
-                'index': 'vector_index',
+                'index': 'vectorIndex',
                 'path': 'embedding',
                 'queryVector': query_vec,
                 'numCandidates': 10 * limit,
