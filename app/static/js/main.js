@@ -12,6 +12,15 @@ $(document).ready(function() {
         generateEmail();
     });
 
+    $(document).on('click', '.flagged-emails-btn', function() {
+        fetchFlagEmails();
+    });
+
+    $(document).on('click', '.all-emails-btn', function() {
+        
+        fetchEmails();
+    });
+
     $('.search-box input').on('keypress', function(e) {
         if (e.which === 13) {
             var query_text = $(this).val().trim();
@@ -21,5 +30,4 @@ $(document).ready(function() {
                 alert('Please enter search text.');
             }
         }
-    });
 });

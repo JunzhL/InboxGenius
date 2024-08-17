@@ -30,6 +30,15 @@ def create_email_route():
     else:
         return jsonify({"error": "Email could not be created"}), 400
 
+@email_routes.route("/emails/flagged", methods=["GET"])
+def get_flagged_emails_route():
+    emails = get_all_emails()
+    flagged_emails = [email for email in emails if email["flagged"]]
+    if flagged_emails:
+        return jsonify(flagged_emails[:10]), 200
+    else:
+        return jsonify({"error": "No flagged emails found"}), 404 
+
 
 @email_routes.route("/emails/<email_id>", methods=["GET"])
 def get_email_by_id_route(email_id):
@@ -43,7 +52,7 @@ def get_email_by_id_route(email_id):
 @email_routes.route("/emails", methods=["GET"])
 def get_all_emails_route():
     emails = get_all_emails()
-    return jsonify(emails[:20]), 200
+    return jsonify(emails[:10]), 200
 
 
 @email_routes.route("/emails/<email_id>", methods=["PATCH"])

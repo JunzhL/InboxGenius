@@ -8,6 +8,7 @@ dnspython==2.6.1
 exceptiongroup==1.2.2
 Flask==3.0.3
 Flask-Cors==4.0.1
+Flask-Login==0.6.3
 google-ai-generativelanguage==0.6.6
 google-api-core==2.19.1
 google-api-python-client==2.141.0
