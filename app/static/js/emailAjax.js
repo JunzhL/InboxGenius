@@ -29,8 +29,7 @@ function fetchFlagEmails() {
 }
 
 function populateEmailList() {
-    emails = loadEmailsFromLocalStorage();
-    sliceEmails(emails, loadPageFromLocalStorage());
+    emails = sliceEmails(loadEmailsFromLocalStorage(), loadPageFromLocalStorage());
     var emailList = $('.email-list ul.list-group');
     emailList.empty(); // Clear the current list
     emails.forEach(function(email) {

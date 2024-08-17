@@ -36,56 +36,7 @@ function sliceEmails(emails, page) {
     return emails.slice(start, end);
 }
 
-// Fetch or generate your email data (this is just an example)
-// function loadEmails(input_emails) {
-//     saveEmailsToLocalStorage(input_emails);
-//     renderEmails();
-// }
-
-// Function to render emails on the current page
-// function renderEmails() {
-//     const emails = loadEmailsFromLocalStorage();
-//     const start = (currentPage - 1) * itemsPerPage;
-//     const end = start + itemsPerPage;
-//     const paginatedEmails = emails.slice(start, end);
-
-//     // const emailList = document.querySelector('.email-items');
-//     // emailList.innerHTML = '';
-
-//     var emailList = $('.email-list ul.list-group');
-//     emailList.empty(); // Clear the current list
-
-//     paginatedEmails.forEach(function(email) {
-//       var date = new Date(email.created_at);
-//       var formattedDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
-//       var emailItem = `
-//           <li class="list-group-item d-flex justify-content-between align-items-center email-item" data-id="${email._id}">
-//               <div class="email-info">
-//                   <h6>${email.sender_info.name}</h6>
-//                   <p class="mb-1">${email.subject}</p>
-//                   <small>${email.preview}</small>
-//               </div>
-//               <small>${formattedDate}</small>
-//           </li>
-//       `;
-//       emailList.append(emailItem);
-//   });
-
-    // paginatedEmails.forEach(email => {
-    //     const emailItem = document.createElement('li');
-    //     emailItem.classList.add('list-group-item');
-    //     emailItem.innerHTML = `<strong>${email.subject}</strong>`;
-    //     emailItem.onclick = () => showEmailContent(email.content);
-    //     emailList.appendChild(emailItem);
-    // });
-// }
-
-// Function to show email content when clicked
-// function showEmailContent(content) {
-//     const emailContent = document.getElementById('email-content');
-//     emailContent.innerHTML = `<p>${content}</p>`;
-// }
-
+// Fetch o
 // Handle Previous page button click
 function prevPage() {
     currentPage = loadPageFromLocalStorage();
@@ -100,7 +51,6 @@ function prevPage() {
 function nextPage() {
     itemsPerPage = 10;
     currentPage = loadPageFromLocalStorage();
-    alert(currentPage * itemsPerPage);
     if (currentPage * itemsPerPage < loadEmailsFromLocalStorage().length) {
         currentPage++;
         savePageToLocalStorage(currentPage);
