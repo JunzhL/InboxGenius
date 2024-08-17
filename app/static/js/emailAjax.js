@@ -30,6 +30,9 @@ function populateEmailList(emails) {
     emails.forEach(function(email) {
         var date = new Date(email.created_at);
         var formattedDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+        
+        var flagIconClass = email.flagged ? 'fas fa-flag flag_active' : 'far fa-flag flag_inactive';
+
         var emailItem = `
             <li class="list-group-item d-flex justify-content-between align-items-center email-item" data-id="${email._id}">
                 <div class="email-info">

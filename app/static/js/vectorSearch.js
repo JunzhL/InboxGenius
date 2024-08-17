@@ -6,6 +6,7 @@ function aiSearch(query_text) {
         data: JSON.stringify({ search_text: query_text }),
         success: function(response) {
             console.log("Vector search response: ", response);
+            populateEmailList(response);
         },
         error: function() {
             console.log('Error searching emails.');
