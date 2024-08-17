@@ -3,6 +3,8 @@ function fetchEmails() {
         url: '/emails', // Endpoint to fetch emails
         method: 'GET',
         success: function(response) {
+            saveEmailsToLocalStorage(response);
+            savePageToLocalStorage(1);
             populateEmailList(response);
         },
         error: function() {
@@ -16,6 +18,8 @@ function fetchFlagEmails() {
         url: '/emails/flagged',
         method: 'GET',
         success: function(response) {
+            saveEmailsToLocalStorage(response);
+            savePageToLocalStorage(1);
             populateEmailList(response);
         },
         error: function() {
@@ -24,7 +28,9 @@ function fetchFlagEmails() {
     });
 }
 
-function populateEmailList(emails) {
+function populateEmailList() {
+    emails = loadEmailsFromLocalStorage();
+    sliceEmails(emails, loadPageFromLocalStorage());
     var emailList = $('.email-list ul.list-group');
     emailList.empty(); // Clear the current list
     emails.forEach(function(email) {

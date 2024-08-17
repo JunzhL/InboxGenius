@@ -174,7 +174,7 @@ while True:
         id += 1
         try:
             formatted_email = format_email(response_json, id)
-            print(formatted_email)
+            # print(formatted_email)
             db[table].update_one({"_id": id}, {"$set": formatted_email})
         except Exception as e:
             print(e)

@@ -16,8 +16,7 @@ $(document).ready(function() {
         fetchFlagEmails();
     });
 
-    $(document).on('click', '.all-emails-btn', function() {
-        
+    $(document).on('click', '.all-emails-btn', function() { 
         fetchEmails();
     });
 
