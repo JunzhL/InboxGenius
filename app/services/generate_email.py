@@ -147,6 +147,29 @@ def format_email(response_json, id: int):
 
     return email
 
+def classify_email(formatted_email):
+    instruction = (
+        """
+            Please classify the email based on the following categories: Family, Social, Friends, Work.
+            If the email does not fit any of the categories, please classify it as other. Answer in a JSON format.
+        """
+    )
+    
+    model = genai.GenerativeModel(
+        model_name="gemini-1.5-flash",
+        generation_config={"top_p": 0.9, "top_k": 100, "temperature": 1},
+        system_instruction=instruction,
+    )
+    
+    response = model.generate_content(formatted_email.get("preview"))
+    response_text = response.text
+    response_text = response_text.replace("```json", "")
+    response_text = response_text.replace("```", "")
+    category = json.loads(response_text).get("category")
+    
+    formatted_email["category"] = category
+    
+    return formatted_email
 
 def generate_email():
     email_id = random.randint(1, 1000)
@@ -178,6 +201,6 @@ def generate_email():
     # parse the response as json
     response_json = json.loads(response_text)
     formatted_email = format_email(response_json, email_id)
-    update_email(email_id, formatted_email)
+    # update_email(email_id, formatted_email)
 
     return formatted_email

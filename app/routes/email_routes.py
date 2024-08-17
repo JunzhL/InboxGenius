@@ -8,7 +8,7 @@ from app.services.email_service import (
 )
 from app.services.vector_search import find_emails
 from app.services.embedding_service import get_text_embedding
-from app.services.generate_email import generate_email
+from app.services.generate_email import generate_email, classify_email
 
 email_routes = Blueprint("emails", __name__)
 
@@ -77,6 +77,11 @@ def delete_email_route(email_id):
 def generate_email_route():
     email = generate_email()
     if email:
+        try:
+            email = classify_email(email)
+        except Exception as e:
+            print(f"Error classifying email: {e}")
+        update_email(email["_id"], email)
         return jsonify(email), 200
     else:
         return jsonify({"error": "Emails could not be generated"}), 400
