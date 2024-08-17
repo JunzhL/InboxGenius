@@ -3,11 +3,12 @@ import google.generativeai as genai
 import os
 
 genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
+table = os.getenv('TABLE')
 
 
 def create_email(email_data):
     try:
-        result = app.db["emails"].insert_one(email_data)
+        result = app.db[table].insert_one(email_data)
         return str(result.inserted_id)
     except Exception as e:
         app.logger.error(f"Error creating email: {e}")
@@ -17,7 +18,7 @@ def create_email(email_data):
 
 def get_email_by_id(email_id):
     try:
-        email = app.db["emails"].find_one({"_id": int(email_id)})
+        email = app.db[table].find_one({"_id": int(email_id)})
         if email:
             return email
         else:
@@ -30,7 +31,7 @@ def get_email_by_id(email_id):
 
 def get_all_emails():
     try:
-        emails = list(app.db["emails"].find({}))
+        emails = list(app.db[table].find({}))
         return emails
     except Exception as e:
         app.logger.error(f"Error getting all emails: {e}")
@@ -40,7 +41,7 @@ def get_all_emails():
 
 def update_email(email_id, update_fields):
     try:
-        result = app.db["emails"].update_one({"_id": email_id}, {"$set": update_fields})
+        result = app.db[table].update_one({"_id": email_id}, {"$set": update_fields})
         if result.modified_count > 0:
             return get_email_by_id(int(email_id))
         else:
@@ -53,7 +54,7 @@ def update_email(email_id, update_fields):
 
 def delete_email(email_id):
     try:
-        result = app.db["emails"].delete_one({"_id": email_id})
+        result = app.db[table].delete_one({"_id": email_id})
         if result.deleted_count > 0:
             return True
         else:

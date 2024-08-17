@@ -13,6 +13,7 @@ load_dotenv()
 
 client = MongoClient(os.getenv('MONGO_URI'), tlsCAFile=certifi.where())
 db = client[os.getenv('DATABASE')]
+table = os.getenv('TABLE')
 
 genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
 
@@ -174,7 +175,7 @@ while True:
         try:
             formatted_email = format_email(response_json, id)
             print(formatted_email)
-            db["emails"].update_one({"_id": id}, {"$set": formatted_email})
+            db[table].update_one({"_id": id}, {"$set": formatted_email})
         except Exception as e:
             print(e)
             pass
