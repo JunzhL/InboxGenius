@@ -1,8 +1,6 @@
-# Ignition-Hack
+# InboxGenius
 
 For Ignition Hackathon
-
-# InboxGenius
 
 **InboxGenius** is an AI-powered mail client designed to revolutionize how you manage your email. By integrating advanced AI capabilities with the power of the Gemini API, Flask, and MongoDB, InboxGenius offers smart, efficient, and personalized email management solutions.
 
