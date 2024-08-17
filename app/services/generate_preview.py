@@ -1,14 +1,14 @@
 import google.generativeai as genai
 import os 
 
-genai.configure(os.getenv('API_KEY'))
+genai.configure(api_key=os.getenv('GOOGLE_API_KEY'))
 
 def get_preview(name, organization, email, subject, content, created_at, attachments):
 
-    instruction = """
+    instruction = f"""
         Please generate a summary of the email below, please keep key information, should be around 100-150 characters.
         For Attachments, please analyze the purpose of the attachments by looking at the file names and summarize the purpose of the attachments.
-        Sender: {name} ({organization})
+        Sender: {name} from {organization}
         Sender_Email: {email}
         Subject: {subject}
         Date: {created_at}
@@ -27,4 +27,5 @@ def get_preview(name, organization, email, subject, content, created_at, attachm
         system_instruction=instruction
         )
     response = model.generate_content("Generate the summary please.")
+    
     return response

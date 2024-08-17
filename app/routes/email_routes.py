@@ -7,6 +7,7 @@ from app.services.email_service import (
     delete_email,
 )
 from app.services.vector_search import find_emails
+from app.services.embedding_service import get_text_embedding
 from app.services.generate_email import generate_email
 
 email_routes = Blueprint("emails", __name__)
@@ -71,14 +72,24 @@ def generate_email_route():
     else:
         return jsonify({"error": "Emails could not be generated"}), 400
     
-@email_routes.route('/find-emails', methods=['POST'])
+@email_routes.route('/find_emails', methods=['POST'])
 def vector_search_emails():
     data = request.json
-    query_vec = data.get('query_vector')
-    limit = data.get('limit', 1)
+    text = data.get('search_text')
+    if not text:
+        return jsonify({'error': 'Search text not provided'}), 400
+    
+    print("Search text", text)
+
+    query_vec = get_text_embedding(text)
+
+    # print("Query embedding vec", query_vec)
 
     if not query_vec:
-        return jsonify({'error': 'Query vector not provided'}), 400
+        return jsonify({'error': 'Generating embedding failed'}), 500
     else:
-        emails = find_emails(query_vec, limit)
+        query_vec = query_vec['embedding']
+        # print("Query embedding vec type", type(query_vec))
+        emails = find_emails(query_vec)
+        print("Emails matched in Routes", emails)
         return jsonify(emails), 200
