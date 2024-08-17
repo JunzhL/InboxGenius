@@ -65,7 +65,7 @@
             <div class="col-md-4 email-list">
                 <h4 class="mt-4">{{ category.capitalize() }} Emails</h4>
                 <div class="search-box">
-                    <input type="text" placeholder="Please enter a description">
+                    <input type="text" placeholder="Please enter a description and press Enter">
                 </div>
                 <nav class="nav nav-pills mt-4">
                     <a class="nav-link active all-emails-btn" href="#" onclick="activateLink(this)">All</a>
@@ -78,6 +78,11 @@
                     <!-- Email Items will be populated here -->
                 </ul>
 
+                <div class="col-md-8 email-preview-container" style="display: none">
+                    <div class="email-preview-content">
+                        <!-- Shows Preview -->
+                    </div>
+                </div>
 
                 <!-- Pagination Controls -->
                 <nav aria-label="Email list pagination">

@@ -111,5 +111,5 @@ def vector_search_emails():
         query_vec = query_vec['embedding']
         # print("Query embedding vec type", type(query_vec))
         emails = find_emails(query_vec)
-        print("Emails matched in Routes", emails)
+        # print("Emails matched in Routes", emails)
         return jsonify(emails), 200

@@ -27,7 +27,7 @@ def find_emails(query_vec, limit=2):
                 'flagged': 1,
                 'embedding': 1,
                 'score': {
-                    '$meta': 'searchScore'
+                    '$meta': 'vectorSearchScore'
                 }
             }
         }
@@ -39,11 +39,7 @@ def find_emails(query_vec, limit=2):
 
     for result in results:
         results_list.append(result)
-        # print("Result", result)
+        print(result['score'])
 
-    # print("Type of result: ", type(results))
-    # print("Emails matched", list(results))
-    # print("Length of emails matched", len(list(results)))
-    # print("Type of result in list: ", type(list(results)))
 
     return results_list

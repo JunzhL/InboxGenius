@@ -31,24 +31,33 @@ function fetchFlagEmails() {
 function populateEmailList() {
     emails = sliceEmails(loadEmailsFromLocalStorage(), loadPageFromLocalStorage());
     var emailList = $('.email-list ul.list-group');
-    emailList.empty(); // Clear the current list
+    emailList.empty();
     emails.forEach(function(email) {
         var date = new Date(email.created_at);
         var formattedDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
-        
-        var flagIconClass = email.flagged ? 'fas fa-flag flag_active' : 'far fa-flag flag_inactive';
 
         var emailItem = `
             <li class="list-group-item d-flex justify-content-between align-items-center email-item" data-id="${email._id}">
                 <div class="email-info">
-                    <h6>${email.sender_info.name}</h6>
-                    <p class="mb-1">${email.subject}</p>
-                    <small>${email.preview}</small>
+                    <h6>${email.subject}</h6>
+                    <p class="mb-1">${email.sender_info.name}</p>
+                </div>
+                <div class="email-preview-container" style="display: none; position: absolute; top: 0; left: 0; width: 100%; border: 1px solid #ddd; padding: 10px; box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); z-index: 10;">
+                    <p>${email.preview}</p>
                 </div>
                 <small>${formattedDate}</small>
             </li>
         `;
         emailList.append(emailItem);
+
+        emailList.find('.email-item').last().hover(
+            function() {
+                $(this).find('.email-preview-container').show();
+            },
+            function() {
+                $(this).find('.email-preview-container').hide();
+            }
+        );
     });
 }
 
