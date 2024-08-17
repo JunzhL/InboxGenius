@@ -36,27 +36,27 @@ def create_app():
     app.register_blueprint(email_routes)
 
     @app.route("/")
-    @login_required
+    # @login_required # TODO: Uncomment this line to require login
     def index():
         return render_template("index.html", category="inbox")
 
     @app.route("/family")
-    @login_required
+    # @login_required
     def family():
         return render_template("index.html", category="family")
 
     @app.route("/social")
-    @login_required
+    # @login_required
     def social():
         return render_template("index.html", category="social")
 
     @app.route("/friends")
-    @login_required
+    # @login_required
     def friends():
         return render_template("index.html", category="friends")
 
     @app.route("/work")
-    @login_required
+    # @login_required
     def work():
         return render_template("index.html", category="work")
     

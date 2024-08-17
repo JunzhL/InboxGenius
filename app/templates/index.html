@@ -68,14 +68,33 @@
                     <input type="text" placeholder="AI Search">
                 </div>
                 <nav class="nav nav-pills mt-4">
-                    <a class="nav-link active" href="#">All</a>
-                    <a class="nav-link" href="#">Starred</a>
-                    <a class="nav-link" href="#">Important</a>
+                    <a class="nav-link active all-emails-btn" href="#" onclick="activateLink(this)">All</a>
+                    <a class="nav-link flagged-emails-btn" href="#" onclick="activateLink(this)">Flagged</a>
+                    <!-- <a class="nav-link" href="#">Starred</a>
+                    <a class="nav-link" href="#">Important</a> -->
                 </nav>
 
                 <ul class="list-group">
                     <!-- Email Items will be populated here -->
                 </ul>
+
+
+                <!-- Pagination Controls -->
+                <nav aria-label="Email list pagination">
+                    <ul class="pagination justify-content-center mt-4">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous" onclick="prevPage()">
+                                <span aria-hidden="true">&laquo;</span> Previous
+                            </a>
+                        </li>
+                        <!-- <li class="page-item"><span class="page-number">Page {{ currentPage }}</span></li> -->
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next" onclick="nextPage()">
+                                Next <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
             
             <!-- Email Content -->
@@ -91,5 +110,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='js/emailAjax.js') }}"></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/otherfunc.js') }}"></script>
 </body>
 </html>

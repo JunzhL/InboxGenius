@@ -11,4 +11,13 @@ $(document).ready(function() {
     $(document).on('click', '.btn-gen-email', function() {
         generateEmail();
     });
+
+    $(document).on('click', '.flagged-emails-btn', function() {
+        fetchFlagEmails();
+    });
+
+    $(document).on('click', '.all-emails-btn', function() {
+        
+        fetchEmails();
+    });
 });

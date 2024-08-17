@@ -11,6 +11,19 @@ function fetchEmails() {
     });
 }
 
+function fetchFlagEmails() {
+    $.ajax({
+        url: '/emails/flagged',
+        method: 'GET',
+        success: function(response) {
+            populateEmailList(response);
+        },
+        error: function() {
+            $('.email-list').html('<p>Error loading flagged emails.</p>');
+        }
+    });
+}
+
 function populateEmailList(emails) {
     var emailList = $('.email-list ul.list-group');
     emailList.empty(); // Clear the current list
@@ -36,12 +49,14 @@ function loadEmailContent(emailId) {
         url: '/emails/' + emailId,
         method: 'GET',
         success: function(response) {
+            var date = new Date(response.created_at);
+            var formattedDate = `${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')}/${date.getFullYear()} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}` + (date.getHours() >= 12 ? ' PM' : ' AM');
             $('#email-content').html(`
                 <h4>${response.subject}</h4>
                 <div class="email-header d-flex justify-content-between align-items-center">
                     <div>
                         <h6>${response.sender_info.name}</h6>
-                        <small>${response.created_at}</small>
+                        <small>${formattedDate}</small>
                     </div>
                 </div>
                 <div class="email-body mt-3">
