@@ -17,6 +17,7 @@ function saveEmailsToLocalStorage(emails) {
 // Load emails from local storage
 function loadEmailsFromLocalStorage() {
   const storedEmails = localStorage.getItem('emails');
+  console.log("Stored emails: ", storedEmails);
   return storedEmails ? JSON.parse(storedEmails) : [];
 }
 

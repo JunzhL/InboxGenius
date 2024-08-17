@@ -96,6 +96,8 @@ def generate_email_route():
 def vector_search_emails():
     data = request.json
     text = data.get('search_text')
+    limit = data.get('limit')
+    print("Limit", limit)
     if not text:
         return jsonify({'error': 'Search text not provided'}), 400
     
@@ -110,6 +112,7 @@ def vector_search_emails():
     else:
         query_vec = query_vec['embedding']
         # print("Query embedding vec type", type(query_vec))
-        emails = find_emails(query_vec)
+
+        emails = find_emails(query_vec, limit)
         # print("Emails matched in Routes", emails)
         return jsonify(emails), 200

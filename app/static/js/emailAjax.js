@@ -28,13 +28,23 @@ function fetchFlagEmails() {
     });
 }
 
-function populateEmailList() {
-    emails = sliceEmails(loadEmailsFromLocalStorage(), loadPageFromLocalStorage());
+function populateEmailList(vectorSearch=false) {
+    if (vectorSearch === true) {
+        var emails = JSON.parse(localStorage.getItem('vectorSearch-result'));
+        console.log("Vector search emails: ", emails);
+    } else {
+        emails = sliceEmails(loadEmailsFromLocalStorage(), loadPageFromLocalStorage());
+        console.log("Current emails: ", emails);
+    }
+    
     var emailList = $('.email-list ul.list-group');
     emailList.empty();
     emails.forEach(function(email) {
         var date = new Date(email.created_at);
         var formattedDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+
+        var date = (vectorSearch === true) ? '' : `<small>${formattedDate}</small>`;
+        var score = vectorSearch && email.score ? `<small style="margin-left: 10px;"> ${email.score.toFixed(2)}</small>` : '';
 
         var emailItem = `
             <li class="list-group-item d-flex justify-content-between align-items-center email-item" data-id="${email._id}">
@@ -45,7 +55,7 @@ function populateEmailList() {
                 <div class="email-preview-container" style="display: none; position: absolute; top: 0; left: 0; width: 100%; border: 1px solid #ddd; padding: 10px; box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); z-index: 10;">
                     <p>${email.preview}</p>
                 </div>
-                <small>${formattedDate}</small>
+                ${date}${score}
             </li>
         `;
         emailList.append(emailItem);
