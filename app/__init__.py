@@ -62,6 +62,11 @@ def create_app():
     # @login_required
     def work():
         return render_template("index.html", category="work")
+
+    @app.route("/other")
+    # @login_required
+    def other():
+        return render_template("index.html", category="other")
     
     @login_manager.user_loader
     def user_loader(email):

@@ -42,6 +42,7 @@
                         <li class="nav-item"><a href="{{ url_for('social') }}" class="nav-link">Social</a></li>
                         <li class="nav-item"><a href="{{ url_for('friends') }}" class="nav-link">Friends</a></li>
                         <li class="nav-item"><a href="{{ url_for('work') }}" class="nav-link">Work</a></li>
+                        <li class="nav-item"><a href="{{ url_for('other') }}" class="nav-link">Other</a></li>
                     </ul>
                 </div>
                 <div class="labels-section mt-4">
@@ -51,6 +52,7 @@
                         <li class="nav-item"><span class="dot social"></span> Social</a></li>
                         <li class="nav-item"><span class="dot friends"></span> Friends</a></li>
                         <li class="nav-item"><span class="dot work"></span> Work</a></li>
+                        <li class="nav-item"><span class="dot other"></span> Other</a></li>
                     </ul>
                 </div>
                 <!-- <div class="logout-section mt-4 text-center">
@@ -62,7 +64,7 @@
             </div>
 
             <!-- Email List -->
-            <div class="col-md-4 email-list">
+            <div class="col-md-4 email-list" data-category="{{ category }}">
                 <h4 class="mt-4">{{ category.capitalize() }} Emails</h4>
                 <div class="search-box">
                     <input type="text" placeholder="Please enter a description and press Enter">

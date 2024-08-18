@@ -33,7 +33,7 @@ def find_emails(query_vec, limit=2):
         }
     ]
 
-    results = db['emails'].aggregate(pipeline)
+    results = db[os.getenv('TABLE')].aggregate(pipeline)
 
     results_list = []
 
