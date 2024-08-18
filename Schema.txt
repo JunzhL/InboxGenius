@@ -12,6 +12,7 @@
 #     "content": "string",
 #     "attachments": ["string"],
 #     "flagged": "boolean",
-#     "vector_embedding": [float]
+#     "vector_embedding": [float],
+#     "category": "string"
 # }
 
