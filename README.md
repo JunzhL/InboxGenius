@@ -101,6 +101,8 @@ Gemini API Key (Sign up at https://ai.google.dev/gemini-api)
 - **AI Suggestions**: Enable or customize AI suggestions for better email prioritization and automation.
 - **AI Classification**: Use the AI-powered email classification feature to categorize emails based on content and context.
 - **Custom Automation**: Set up rules and automation to further streamline your inbox based on your workflow.
+- **Generate Email**: Use the "Generate Email" button to create a random email for testing purposes. (This feature later will connect to the email server to send the email)
+
 
 ## Contributing
 
