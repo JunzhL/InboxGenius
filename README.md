@@ -65,7 +65,7 @@ For Ignition Hackathon
     flask run
     ```
 
-2. **Access InboxGenius**: Open your browser and navigate to `http://127.0.0.1:5000/`.
+2. **Access InboxGenius**: Open your browser and navigate to `http://127.0.0.1:8000/`.
 
 ## Usage
 
