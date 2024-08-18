@@ -70,7 +70,7 @@ function populateEmailList() {
         var date = new Date(email.created_at);
         var formattedDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
         
-        var flagIconClass = email.flagged ? 'fas fa-flag flag_active' : 'far fa-flag flag_inactive';
+        // var flagIconClass = email.flagged ? 'fas fa-flag flag_active' : 'far fa-flag flag_inactive';
         
         const catalog2color = {
             "Family": () => "Orange",
