@@ -18,9 +18,15 @@ For Ignition Hackathon
 - **MongoDB**: A NoSQL database that stores and manages email data, enhanced with vector embeddings to power advanced search features.
 
 ## Requirements
-Python 3.11 or higher
+Python 3.11 or higher is required to run the application. 
+https://www.python.org/
 
 Gemini API Key (Sign up at https://ai.google.dev/gemini-api)
+
+### Or you can use the following API, which is used for demonstration purposes for ignition hackathon: (Please do not use this API key for production purposes, this may be revoked at any time) This API key may expire since many people are using it.
+
+`Genimi API Key: AIzaSyCrhFUQc9gf_QottXG9A_goXzV07HRZWT8`
+
 
 ## Installation
 
@@ -49,7 +55,7 @@ Gemini API Key (Sign up at https://ai.google.dev/gemini-api)
     pip install -r requirements.txt
     ```
 
-## Configuration
+## Configuration (Must do before running the application)
 
 1. **Set up MongoDB**: Ensure that you have a running instance of MongoDB. You can either set it up locally or use a cloud-based solution like MongoDB Atlas.
 
@@ -59,8 +65,18 @@ Gemini API Key (Sign up at https://ai.google.dev/gemini-api)
     MONGO_URI = "mongodb+srv://Admin:rmkZXtzCUtJdHg2V@cluster0.xt7zv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
     DATABASE = "Ignitionhackathon"
     TABLE = "emails"
-    GOOGLE_API_KEY=YOUR_GEMINI_API_KEY
-    FLASK_RUN_PORT=8000
+    GOOGLE_API_KEY=YOUR_GEMINI_API_KEY # or use the provided API key
+    FLASK_RUN_PORT=PORT_NUMBER
+    FLASK_RUN_HOST="127.0.0.1"
+    ```
+    (You can use the following configuration for ignition hackathon demonstration purposes)
+    ```bash
+    # Example .env file
+    MONGO_URI = "mongodb+srv://Admin:rmkZXtzCUtJdHg2V@cluster0.xt7zv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    DATABASE = "Ignitionhackathon"
+    TABLE = "emails"
+    GOOGLE_API_KEY= "AIzaSyCrhFUQc9gf_QottXG9A_goXzV07HRZWT8"
+    FLASK_RUN_PORT= 8000
     FLASK_RUN_HOST="127.0.0.1"
     ```
 
@@ -72,12 +88,18 @@ Gemini API Key (Sign up at https://ai.google.dev/gemini-api)
     flask run
     ```
 
-2. **Access InboxGenius**: Open your browser and navigate to `http://127.0.0.1:8000/`.
+2. **Access InboxGenius**: Open your browser and navigate to `http://127.0.0.1:8000/`. (Or the port number you specified in the `.env` file)
+
+3. **Login**: Use the following credentials to log in:
+
+    - **Email**: `demo@hack.com`
+    - **Password**: `ignition`
 
 ## Usage
 
 - **Inbox Management**: View and manage your emails through the web interface. Use the smart search feature to find emails based on context, not just keywords. More precise input leads to better results.
 - **AI Suggestions**: Enable or customize AI suggestions for better email prioritization and automation.
+- **AI Classification**: Use the AI-powered email classification feature to categorize emails based on content and context.
 - **Custom Automation**: Set up rules and automation to further streamline your inbox based on your workflow.
 
 ## Contributing
