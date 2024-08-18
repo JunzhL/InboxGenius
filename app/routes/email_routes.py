@@ -39,6 +39,16 @@ def get_flagged_emails_route():
     else:
         return jsonify({"error": "No flagged emails found"}), 404 
 
+@email_routes.route("/emails/category/<category>", methods=["GET"])
+def get_emails_by_category_route(category):
+    emails = get_all_emails()
+    category_emails = []
+    category = category.capitalize()
+    for email in emails:
+        if email.get("category") == category:
+            print("Email", email)
+    category_emails = [email for email in emails if email.get("category") == category]
+    return jsonify(category_emails), 200
 
 @email_routes.route("/emails/<email_id>", methods=["GET"])
 def get_email_by_id_route(email_id):

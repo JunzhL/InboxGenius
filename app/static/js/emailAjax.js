@@ -13,6 +13,21 @@ function fetchEmails() {
     });
 }
 
+function fetchCategoryEmails(category) {
+    $.ajax({
+        url: '/emails/category/' + category,
+        method: 'GET',
+        success: function(response) {
+            saveEmailsToLocalStorage(response);
+            savePageToLocalStorage(1);
+            populateEmailList(response);
+        },
+        error: function() {
+            $('.email-list').html('<p>Error loading category emails.</p>');
+        }
+    });
+}
+
 function fetchFlagEmails() {
     $.ajax({
         url: '/emails/flagged',

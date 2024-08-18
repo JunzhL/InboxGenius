@@ -1,6 +1,6 @@
 $(document).ready(function() {
     // Initialize the app by fetching emails
-    fetchEmails();
+    // fetchEmails();
 
     // Event listener for email items (this needs to be attached after the emails are loaded)
     $(document).on('click', '.email-item', function() {

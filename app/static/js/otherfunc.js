@@ -58,5 +58,18 @@ function nextPage() {
     }
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+    // Access the category from the data attribute
+    const emailListElement = document.querySelector('.email-list');
+    const category = emailListElement.getAttribute('data-category');
+
+    if (category === 'inbox') {
+        fetchEmails();
+    }
+    else {
+        fetchCategoryEmails(category);
+    }
+});
+
 // Initialize the email list
 // loadEmails();
