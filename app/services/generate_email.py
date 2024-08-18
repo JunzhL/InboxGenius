@@ -156,7 +156,7 @@ def classify_email(formatted_email):
     
     model = genai.GenerativeModel(
         model_name="gemini-1.5-flash",
-        generation_config={"top_p": 0.9, "top_k": 100, "temperature": 1},
+        generation_config={"top_p": 0.5, "top_k": 50, "temperature": 0.6},
         system_instruction=instruction,
     )
     
