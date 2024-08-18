@@ -25,6 +25,7 @@ def find_emails(query_vec, limit=2):
                 'content': 1,
                 'attachments': 1,
                 'flagged': 1,
+                'category': 1,
                 'embedding': 1,
                 'score': {
                     '$meta': 'vectorSearchScore'

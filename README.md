@@ -17,6 +17,11 @@ For Ignition Hackathon
 - **Flask**: Serves as the web framework for the application, enabling a simple yet powerful backend.
 - **MongoDB**: A NoSQL database that stores and manages email data, enhanced with vector embeddings to power advanced search features.
 
+## Requirements
+Python 3.11 or higher
+
+Gemini API Key (Sign up at https://ai.google.dev/gemini-api)
+
 ## Installation
 
 1. **Clone the repository**:
@@ -51,10 +56,12 @@ For Ignition Hackathon
 2. **Configure Environment Variables**: Create config `.env` file in the root directory and add the following variables:
 
     ```bash
-    MONGO_URI=Set_Later
-    GOOGLE_API_KEY=your_gemini_api_key
-    FLASK_APP=inboxgenius
-    FLASK_ENV=development
+    MONGO_URI = "mongodb+srv://Admin:rmkZXtzCUtJdHg2V@cluster0.xt7zv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    DATABASE = "Ignitionhackathon"
+    TABLE = "emails"
+    GOOGLE_API_KEY=YOUR_GEMINI_API_KEY
+    FLASK_RUN_PORT=8000
+    FLASK_RUN_HOST="127.0.0.1"
     ```
 
 ## Running the Application
