@@ -1,5 +1,6 @@
 function activateLink(element) {
   // Remove 'active' class from all links
+  localStorage.setItem("vectorSearch", false);
   const links = document.querySelectorAll(".nav-link");
   links.forEach((link) => link.classList.remove("active"));
 
@@ -16,21 +17,41 @@ function saveEmailsToLocalStorage(emails) {
 
 // Load emails from local storage
 function loadEmailsFromLocalStorage() {
-  const storedEmails = localStorage.getItem('emails');
-  return storedEmails ? JSON.parse(storedEmails) : [];
+    const vecSearch = localStorage.getItem('vectorSearch');
+    if (vecSearch === 'true') {
+        const storedEmails = localStorage.getItem('vectorSearch-result');
+        console.log("Stored emails: ", storedEmails);
+        return storedEmails ? JSON.parse(storedEmails) : [];
+    } else {
+        const storedEmails = localStorage.getItem('emails');
+        console.log("Stored emails: ", storedEmails);
+        return storedEmails ? JSON.parse(storedEmails) : [];
+    }
 }
 
 function savePageToLocalStorage(page) {
-    localStorage.setItem('page', JSON.stringify(page));
+    const vectorSearch = localStorage.getItem('vectorSearch');
+    if (vectorSearch === 'true') {
+        localStorage.setItem('vectorSearch-page', JSON.stringify(page));
+    } else {
+        localStorage.setItem('page', JSON.stringify(page));
+    }
 }
 
 function loadPageFromLocalStorage() {
-    const storedPage = localStorage.getItem('page');
-    return storedPage ? JSON.parse(storedPage) : 1;
+    const vectorSearch = localStorage.getItem('vectorSearch');
+    if (vectorSearch === 'true') {
+        const storedPage = localStorage.getItem('vectorSearch-page');
+        return storedPage ? JSON.parse(storedPage) : 1;
+    } else {
+        const storedPage = localStorage.getItem('page');
+        return storedPage ? JSON.parse(storedPage) : 1;
+    }
+
 }
 
 function sliceEmails(emails, page) {
-    const itemsPerPage = 10;
+    const itemsPerPage = 5;
     const start = (page - 1) * itemsPerPage;
     const end = start + itemsPerPage;
     return emails.slice(start, end);
@@ -45,17 +66,19 @@ function prevPage() {
         savePageToLocalStorage(currentPage);
         populateEmailList();
     }
+
 }
 
 // Handle Next page button click
 function nextPage() {
-    itemsPerPage = 10;
+    itemsPerPage = 5;
     currentPage = loadPageFromLocalStorage();
     if (currentPage * itemsPerPage < loadEmailsFromLocalStorage().length) {
         currentPage++;
         savePageToLocalStorage(currentPage);
         populateEmailList();
     }
+
 }
 
 document.addEventListener("DOMContentLoaded", function() {

@@ -65,11 +65,11 @@ For Ignition Hackathon
     flask run
     ```
 
-2. **Access InboxGenius**: Open your browser and navigate to `http://127.0.0.1:5000/`.
+2. **Access InboxGenius**: Open your browser and navigate to `http://127.0.0.1:8000/`.
 
 ## Usage
 
-- **Inbox Management**: View and manage your emails through the web interface. Use the smart search feature to find emails based on context, not just keywords.
+- **Inbox Management**: View and manage your emails through the web interface. Use the smart search feature to find emails based on context, not just keywords. More precise input leads to better results.
 - **AI Suggestions**: Enable or customize AI suggestions for better email prioritization and automation.
 - **Custom Automation**: Set up rules and automation to further streamline your inbox based on your workflow.
 

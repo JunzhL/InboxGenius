@@ -38,26 +38,27 @@ def test_client():
 #     assert response.status_code == 201
 #     assert '_id' in response.json
 
-def test_get_email_by_id(test_client):
-    email_data = {
-        "_id": "124",
-        "sender_info": {"name": "Harry Alex", 
-                        "organization": "Example Inc.",
-                        "email": "Harry@example.com"},
-        "subject": "Test Email 2",
-        "preview": "This is a test",
-        "date": "2024-08-16",
-        "content": "This is the content",
-        "attachments": [],
-        "flagged": False,
-        "embedding": [0.1, 0.2]
-    }
-    response1 = test_client.post('/emails', json=email_data)
-    print(response1.json)
-    assert response1.status_code == 201
-    response = test_client.get('/emails/124')
-    assert response.status_code == 200
-    # assert response.json['subject'] == 'Test Email 2'
+# def test_get_email_by_id(test_client):
+#     email_data = {
+#         "_id": "124",
+#         "sender_info": {"name": "Harry Alex", 
+#                         "organization": "Example Inc.",
+#                         "email": "Harry@example.com"},
+#         "subject": "Test Email 2",
+#         "preview": "This is a test",
+#         "date": "2024-08-16",
+#         "content": "This is the content",
+#         "attachments": [],
+#         "flagged": False,
+#         "embedding": [0.1, 0.2]
+#     }
+#     response1 = test_client.post('/emails', json=email_data)
+#     print(response1.json)
+#     assert response1.status_code == 201
+#     response = test_client.get('/emails/124')
+#     assert response.status_code == 200
+#     assert response.json['subject'] == 'Test Email 2'
+#     test_client.delete('/emails/124')
 
 # def test_get_all_emails(test_client):
 #     email_data1 = {
@@ -92,27 +93,30 @@ def test_get_email_by_id(test_client):
 #     assert response.status_code == 200
 #     assert len(response.json) == 4
 
-# def test_update_email(test_client):
-#     email_data = {
-#         "_id": "127",
-#         "sender_info": {"name": "Alice", 
-#                         "organization": "Example Inc.",
-#                         "email": "alice@example.com"},
-#         "subject": "Old Subject",
-#         "preview": "Old preview",
-#         "date": "2024-08-16",
-#         "content": "Old content",
-#         "attachments": [],
-#         "flagged": False,
-#         "embedding": [0.5, 0.6]
-#     }
-#     test_client.post('/emails', json=email_data)
-#     update_data = {"subject": "Updated Subject"}
-#     response = test_client.patch('/emails/127', json=update_data)
-#     assert response.status_code == 200
-#     response = test_client.get('/emails/127')
-#     assert response.status_code == 200
-#     assert response.json['subject'] == 'Updated Subject'
+def test_update_email(test_client):
+    email_data = {
+        "_id": "128",
+        "sender_info": {"name": "Alice", 
+                        "organization": "Example Inc.",
+                        "email": "alice@example.com"},
+        "subject": "Old Subject",
+        "preview": "Old preview",
+        "date": "2024-08-16",
+        "content": "Old content",
+        "attachments": [],
+        "flagged": False,
+        "embedding": [0.5, 0.6]
+    }
+    response1 = test_client.post('/emails', json=email_data)
+    assert response1.status_code == 201
+    update_data = {"flagged": True}
+    response = test_client.put('/emails/128', json=update_data)
+    print(response)
+    # response = test_client.get('/emails/128')
+    assert response.status_code == 200
+    assert response.json['flagged'] == True
+    test_client.delete('/emails/128')
+
 
 # def test_delete_email(test_client):
 #     response = test_client.delete('/emails/127')

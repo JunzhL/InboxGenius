@@ -2,9 +2,8 @@ from flask import current_app as app
 import google.generativeai as genai
 import os
 
-genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
+# genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
 table = os.getenv('TABLE')
-
 
 def create_email(email_data):
     try:
@@ -18,9 +17,9 @@ def create_email(email_data):
 
 def get_email_by_id(email_id):
     try:
-        email = app.db[table].find_one({"_id": int(email_id)})
+        email = list(app.db[table].find({"_id": email_id}))
         if email:
-            return email
+            return email[0]
         else:
             return None
     except Exception as e:
@@ -41,9 +40,13 @@ def get_all_emails():
 
 def update_email(email_id, update_fields):
     try:
-        result = app.db[table].update_one({"_id": email_id}, {"$set": update_fields})
+        result = app.db[table].update_one(
+            {"_id": email_id}, 
+            {"$set": update_fields},
+            upsert=True
+        )
         if result.modified_count > 0:
-            return get_email_by_id(int(email_id))
+            return get_email_by_id(email_id)
         else:
             return None
     except Exception as e:

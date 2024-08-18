@@ -11,5 +11,6 @@ email_schema = {
     "content": str,
     "attachments": [str],
     "flagged": bool,
-    "embedding": [float]
+    "embedding": [float],
+    "category": str
 }

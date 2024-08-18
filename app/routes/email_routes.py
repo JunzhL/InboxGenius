@@ -12,13 +12,13 @@ from app.services.generate_email import generate_email, classify_email
 
 email_routes = Blueprint("emails", __name__)
 
-@email_routes.route("/email/<int:email_id>")
-def get_email(email_id):
-    for category, email_list in emails.items():
-        for email in email_list:
-            if email["id"] == email_id:
-                return jsonify(email)
-    return jsonify({"error": "Email not found"}), 404
+# @email_routes.route("/email/<int:email_id>")
+# def get_email(email_id):
+#     for category, email_list in emails.items():
+#         for email in email_list:
+#             if email["id"] == email_id:
+#                 return jsonify(email)
+#     return jsonify({"error": "Email not found"}), 404
 
 
 @email_routes.route("/emails", methods=["POST"])
@@ -65,7 +65,7 @@ def get_all_emails_route():
     return jsonify(emails), 200
 
 
-@email_routes.route("/emails/<email_id>", methods=["PATCH"])
+@email_routes.route("/emails/<email_id>", methods=["PUT"])
 def update_email_route(email_id):
     email_data = request.json
     email = update_email(email_id, email_data)
@@ -86,12 +86,18 @@ def delete_email_route(email_id):
 @email_routes.route("/emails/generated", methods=["GET"])
 def generate_email_route():
     email = generate_email()
+    # print("Generated email", email)
+    # print("\n")
     if email:
         try:
             email = classify_email(email)
+            # print("Classified email", email)
+            print("\n")
         except Exception as e:
             print(f"Error classifying email: {e}")
         update_email(email["_id"], email)
+        print("Updated email", email)
+        print("\n")
         return jsonify(email), 200
     else:
         return jsonify({"error": "Emails could not be generated"}), 400
@@ -100,6 +106,8 @@ def generate_email_route():
 def vector_search_emails():
     data = request.json
     text = data.get('search_text')
+    limit = data.get('limit')
+    print("Limit", limit)
     if not text:
         return jsonify({'error': 'Search text not provided'}), 400
     
@@ -114,6 +122,7 @@ def vector_search_emails():
     else:
         query_vec = query_vec['embedding']
         # print("Query embedding vec type", type(query_vec))
-        emails = find_emails(query_vec)
-        print("Emails matched in Routes", emails)
+
+        emails = find_emails(query_vec, limit)
+        # print("Emails matched in Routes", emails)
         return jsonify(emails), 200

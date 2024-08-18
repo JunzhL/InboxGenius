@@ -73,6 +73,7 @@ body {
 }
 
 .email-content {
+    z-index: 2;
     background-color: #f8f9fa;
     height: 100vh;
     overflow-y: auto;
@@ -282,10 +283,23 @@ body {
     font-weight: 900;
     position: absolute;
     right: 15px;
-    top: 50%;
+    top: 35%;
     transform: translateY(-50%);
     font-size: 16px;
     color: #777; /* Same color as placeholder text */
+}
+
+.email-preview-container {
+    border-left: 1px solid #333;
+    padding: 10px;
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.email-item {
+    position: relative;
+    cursor: pointer;
 }
 
 .nav-pills {
