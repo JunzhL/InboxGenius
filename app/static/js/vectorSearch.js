@@ -1,10 +1,10 @@
 function aiSearch(query_text) {
     localStorage.setItem('vectorSearch', true);
-    // limit = localStorage.getItem('emails');
-    // limit = JSON.parse(limit).length;
-    limit = localStorage.getItem('vectorSearchLimit');
-    // console.log("Limit type: ", typeof limit);
-    // console.log("Limit: ", limit);
+    limit = localStorage.getItem('emails');
+    limit = JSON.parse(limit).length;
+    // limit = localStorage.getItem('vectorSearchLimit');
+    console.log("Limit type: ", typeof limit);
+    console.log("Limit: ", limit);
 
     $.ajax({
         type: 'POST',

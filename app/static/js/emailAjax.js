@@ -90,12 +90,11 @@ function populateEmailList() {
         var emailItem = `
             <li class="list-group-item d-flex justify-content-between align-items-center email-item" data-id="${email._id}">
                 <div class="email-info">
-                    <h6>${email.sender_info.name}</h6>
+                    <h6>${email.subject}</h6>
                     <div class="d-flex align-items-center">
                         <span class="dot" style="background-color: ${catalogColor}; border-radius: 50%; width: 10px; height: 10px;"></span>
-                        <p class="mb-1">${email.subject}</p>
+                        <p class="mb-1">${email.sender_info.name}</p>
                     </div>
-                    <small>${email.preview}</small>
                 </div>
                 <div class="email-preview-container" style="display: none; position: absolute; top: 0; left: 0; width: 100%; border: 1px solid #ddd; padding: 10px; box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); z-index: 10;">
                     <p>${email.preview}</p>
