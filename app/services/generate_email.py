@@ -179,10 +179,10 @@ def generate_email():
         + generate_topic()
         + """.
             Can be all kinds of email, for example, personal emails, team collaboration, etc. Be creative.
-            Generate all types of emails equally. No grammar error is allowed.
+            Generate all types of emails equally. No grammar error is allowed. Date should be random around the 2024 year.
             Do not inlucde emoji.
             Please don't use "example company" or "example name" in the email. Use a real company name and a real person name as needed. Also, don't use [ ] or < > as a placeholder in the email.
-            Please generate a random replacement for any placeholder in the email, such as "Dear [name]" or "Hello <name>".
+            Please generate a random replacement for any placeholder in the email, such as "Dear [name]" or "Hello <name>", and project names as well. 
             Please generate email in JSON format, including information about sender_name, sender_email, organization_name (optional), subject, email_body, created_at_time (around the 2024 year), and attachments (optional, could be multiple, in a list of string format (split by space)).
             If the optional information section is empty, leave it null. Generate 1 emails at a time.
             """
