@@ -80,7 +80,7 @@ function populateEmailList() {
             // Add more cases as needed
         };
 
-        // console.log(email.category);
+        console.log(email.category);
         var catalogColor = (email.category in catalog2color) ? catalog2color[email.category]() : "Black";
 
         var date = (vecSearch === 'true') ? '' : `<small>${formattedDate}</small>`;
