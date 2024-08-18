@@ -1,7 +1,8 @@
 function aiSearch(query_text) {
-
-    limit = localStorage.getItem('emails');
-    limit = JSON.parse(limit).length;
+    localStorage.setItem('vectorSearch', true);
+    // limit = localStorage.getItem('emails');
+    // limit = JSON.parse(limit).length;
+    limit = localStorage.getItem('vectorSearchLimit');
     // console.log("Limit type: ", typeof limit);
     // console.log("Limit: ", limit);
 
@@ -16,7 +17,7 @@ function aiSearch(query_text) {
         success: function(response) {
             console.log("Vector search response: ", response);
             localStorage.setItem('vectorSearch-result', JSON.stringify(response));
-            populateEmailList(true);
+            populateEmailList();
             console.log("Email list populated after vec search.");
         },
         error: function() {

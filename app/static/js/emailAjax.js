@@ -1,15 +1,26 @@
+let vectorSearch = false;
+
+function setVectorSearch(val) {
+    return new Promise((resolve) => {
+        localStorage.setItem('vectorSearch', val);
+        resolve();
+    });
+}
+
 function fetchEmails() {
-    $.ajax({
-        url: '/emails', // Endpoint to fetch emails
-        method: 'GET',
-        success: function(response) {
-            saveEmailsToLocalStorage(response);
-            savePageToLocalStorage(1);
-            populateEmailList(response);
-        },
-        error: function() {
-            $('.email-list').html('<p>Error loading email list.</p>');
-        }
+    setVectorSearch('false').then(() => {
+        $.ajax({
+            url: '/emails', // Endpoint to fetch emails
+            method: 'GET',
+            success: function(response) {
+                saveEmailsToLocalStorage(response);
+                savePageToLocalStorage(1);
+                populateEmailList(response);
+            },
+            error: function() {
+                $('.email-list').html('<p>Error loading email list.</p>');
+            }
+        });
     });
 }
 
@@ -28,9 +39,10 @@ function fetchFlagEmails() {
     });
 }
 
-function populateEmailList(vectorSearch=false) {
-    if (vectorSearch === true) {
-        var emails = JSON.parse(localStorage.getItem('vectorSearch-result'));
+function populateEmailList() {
+    const vecSearch = localStorage.getItem('vectorSearch');
+    if (vecSearch === 'true') {
+        emails = sliceEmails(loadEmailsFromLocalStorage(true), loadPageFromLocalStorage(true));
         console.log("Vector search emails: ", emails);
     } else {
         emails = sliceEmails(loadEmailsFromLocalStorage(), loadPageFromLocalStorage());
@@ -43,8 +55,8 @@ function populateEmailList(vectorSearch=false) {
         var date = new Date(email.created_at);
         var formattedDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
 
-        var date = (vectorSearch === true) ? '' : `<small>${formattedDate}</small>`;
-        var score = vectorSearch && email.score ? `<small style="margin-left: 10px;"> ${email.score.toFixed(2)}</small>` : '';
+        var date = (vecSearch === 'true') ? '' : `<small>${formattedDate}</small>`;
+        var score = (vecSearch === 'true') && email.score ? `<small style="margin-left: 10px;"> ${email.score.toFixed(2)}</small>` : '';
 
         var emailItem = `
             <li class="list-group-item d-flex justify-content-between align-items-center email-item" data-id="${email._id}">
